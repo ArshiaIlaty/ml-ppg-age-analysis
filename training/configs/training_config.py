@@ -1,7 +1,3 @@
-#
-# For licensing see accompanying LICENSE file.
-# Copyright (C) 2025 Apple Inc. All Rights Reserved.
-#
 from typing import Optional
 
 
@@ -26,16 +22,17 @@ class TrainingPpgSsl:
     dataloader_params: dict = {"batch_size": 16}
 
     embedding_dim = 256
-    input_shape = (4, 3840, 2)
-
+    # original: input_shape = (4, 3840, 2)
+    input_shape = (1, 1200, 2)
     model_params: dict = {
         "backbone_params": {
-            "input_shape": input_shape[0],
-            "output_shape": embedding_dim,
+            "input_shape": input_shape[0],          # number of channels
+            "output_shape": embedding_dim,          # embedding dimension
             "kernel_size": 3,
             "activation": "swish",
             "expansion_factor": 7,
             "se_ratio": 0.25,
+            "downsample_factor": 16,                # reduced from 64 for 1200-length PPG
         },
         "wrapper_params": {
             "mlp_head_layers": [embedding_dim, 1024, 128],

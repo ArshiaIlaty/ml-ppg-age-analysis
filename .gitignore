@@ -147,3 +147,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.cursor/
+.env
+.autopilot.json
+.cursorindexingignore
+*.md
+.specstory/
